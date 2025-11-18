@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zaratini.IA - Plataforma de IA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --fiap-red: #E31E24;
+            --fiap-dark: #1A1A1A;
+            --fiap-gray: #333333;
+            --fiap-light: #F5F5F5;
+            --fiap-blue: #0066CC;
+            --fiap-green: #00A859;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--fiap-dark);
+            color: var(--fiap-light);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--fiap-dark);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--fiap-red);
+            margin-left: 10px;
+        }
+        
+        .logo span {
+            color: var(--fiap-light);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: var(--fiap-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--fiap-red);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .btn-login {
+            background-color: transparent;
+            color: var(--fiap-light);
+            border: 1px solid var(--fiap-light);
+        }
+        
+        .btn-login:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn-signup {
+            background-color: var(--fiap-red);
+            color: white;
+        }
+        
+        .btn-signup:hover {
+            background-color: #c0171c;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--fiap-dark) 0%, var(--fiap-gray) 100%);
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyMjcsMzAsMzYsMC4wNSkiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjcGF0dGVybikiLz48L3N2Zz4=');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero h2 span {
+            color: var(--fiap-red);
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: #cccccc;
+        }
+        
+        .btn-primary {
+            background-color: var(--fiap-red);
+            color: white;
+            padding: 12px 30px;
+            font-size: 18px;
+            border-radius: 6px;
+        }
+        
+        .btn-primary:hover {
+            background-color: #c0171c;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(227, 30, 36, 0.3);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: var(--fiap-gray);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--fiap-light);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #cccccc;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid var(--fiap-red);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            color: var(--fiap-red);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--fiap-light);
+        }
+        
+        .feature-card p {
+            color: #cccccc;
+        }
+        
+        /* Dashboard Preview */
+        .dashboard {
+            padding: 100px 0;
+            background-color: var(--fiap-dark);
+        }
+        
+        .dashboard-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .dashboard-text {
+            flex: 1;
+        }
+        
+        .dashboard-text h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--fiap-light);
+        }
+        
+        .dashboard-text p {
+            color: #cccccc;
+            margin-bottom: 30px;
+        }
+        
+        .dashboard-visual {
+            flex: 1;
+            background-color: var(--fiap-gray);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .dashboard-title {
+            font-weight: 600;
+            color: var(--fiap-light);
+        }
+        
+        .dashboard-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .control-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .control-btn.red {
+            background-color: #ff5f57;
+        }
+        
+        .control-btn.yellow {
+            background-color: #ffbd2e;
+        }
+        
+        .control-btn.green {
+            background-color: #28ca42;
+        }
+        
+        .dashboard-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .dashboard-module {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            padding: 15px;
+            min-height: 120px;
+        }
+        
+        .module-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .module-icon {
+            width: 20px;
+            height: 20px;
+            background-color: var(--fiap-red);
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        
+        .module-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--fiap-light);
+        }
+        
+        .module-content {
+            font-size: 12px;
+            color: #aaaaaa;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #111111;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--fiap-light);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaaaaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--fiap-red);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #888888;
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+            }
+            
+            .hero h2 {
+                font-size: 36px;
+            }
+            
+            .dashboard-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-robot" style="color: var(--fiap-red); font-size: 28px;"></i>
+                    <h1>Zaratini<span>.IA</span></h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Início</a></li>
+                        <li><a href="#">Recursos</a></li>
+                        <li><a href="#">Soluções</a></li>
+                        <li><a href="#">Preços</a></li>
+                        <li><a href="#">Contato</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <button class="btn btn-login">Entrar</button>
+                    <button class="btn btn-signup">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Plataforma de IA <span>Avançada</span> para seu Negócio</h2>
+                <p>Integre inteligência artificial de ponta em seus processos com nossa solução completa e personalizável.</p>
+                <button class="btn btn-primary">Começar Agora</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Recursos Principais</h2>
+                <p>Descubra as funcionalidades que tornam nossa plataforma única no mercado</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Chat Opened Trigger</h3>
+                    <p>Sistema avançado de gatilhos de conversação com múltiplas opções de entrada e saída para interações naturais e eficientes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-keyboard"></i>
+                    </div>
+                    <h3>Chat Input</h3>
+                    <p>Processamento inteligente de mensagens com integração a agentes, memória e histórico de conversas para respostas contextuais.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <h3>URL Retainer</h3>
+                    <p>Captura e retenção de URLs com processamento de documentos e extração de informações relevantes para análises aprofundadas.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Google Search</h3>
+                    <p>Integração direta com mecanismos de busca para obtenção de informações em tempo real e ampliação do conhecimento da IA.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Preview -->
+    <section class="dashboard">
+        <div class="container">
+            <div class="dashboard-content">
+                <div class="dashboard-text">
+                    <h2>Dashboard Intuitivo e Poderoso</h2>
+                    <p>Controle todas as funcionalidades da plataforma através de uma interface moderna e responsiva, projetada para máxima produtividade.</p>
+                    <p>Monitore em tempo real o desempenho dos agentes de IA, visualize métricas importantes e ajuste configurações com facilidade.</p>
+                    <button class="btn btn-primary">Experimente Agora</button>
+                </div>
+                <div class="dashboard-visual">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">Zaratini.IA Dashboard</div>
+                        <div class="dashboard-controls">
+                            <div class="control-btn red"></div>
+                            <div class="control-btn yellow"></div>
+                            <div class="control-btn green"></div>
+                        </div>
+                    </div>
+                    <div class="dashboard-body">
+                        <div class="dashboard-module">
+                            <div class="module-header">
+                                <div class="module-icon"></div>
+                                <div class="module-title">Chat Opened Trigger</div>
+                            </div>
+                            <div class="module-content">
+                                <p>Input Text: <span style="color: var(--fiap-green)">✓</span></p>
+                                <p>Message Widget: <span style="color: var(--fiap-green)">✓</span></p>
+                                <p>Chat Output: <span style="color: var(--fiap-green)">✓</span></p>
+                            </div>
+                        </div>
+                        <div class="dashboard-module">
+                            <div class="module-header">
+                                <div class="module-icon"></div>
+                                <div class="module-title">Chat Input</div>
+                            </div>
+                            <div class="module-content">
+                                <p>Message File: <span style="color: var(--fiap-green)">✓</span></p>
+                                <p>All Agent: <span style="color: var(--fiap-green)">✓</span></p>
+                                <p>Memory: <span style="color: var(--fiap-green)">✓</span></p>
+                            </div>
+                        </div>
+                        <div class="dashboard-module">
+                            <div class="module-header">
+                                <div class="module-icon"></div>
+                                <div class="module-title">URL Retainer</div>
+                            </div>
+                            <div class="module-content">
+                                <p>Text URL: <span style="color: var(--fiap-green)">✓</span></p>
+                                <p>URL Records: <span style="color: var(--fiap-green)">✓</span></p>
+                                <p>Documents: <span style="color: var(--fiap-green)">✓</span></p>
+                            </div>
+                        </div>
+                        <div class="dashboard-module">
+                            <div class="module-header">
+                                <div class="module-icon"></div>
+                                <div class="module-title">Google Search</div>
+                            </div>
+                            <div class="module-content">
+                                <p>Word Query: <span style="color: var(--fiap-green)">✓</span></p>
+                                <p>URL Records: <span style="color: var(--fiap-green)">✓</span></p>
+                                <p>URL as text: <span style="color: var(--fiap-green)">✓</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Zaratini.IA</h3>
+                    <ul>
+                        <li><a href="#">Sobre Nós</a></li>
+                        <li><a href="#">Carreiras</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Imprensa</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Produtos</h3>
+                    <ul>
+                        <li><a href="#">Chat Opened Trigger</a></li>
+                        <li><a href="#">Chat Input</a></li>
+                        <li><a href="#">URL Retainer</a></li>
+                        <li><a href="#">Google Search</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Recursos</h3>
+                    <ul>
+                        <li><a href="#">Documentação</a></li>
+                        <li><a href="#">Tutoriais</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">Suporte</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li><a href="#">Fale Conosco</a></li>
+                        <li><a href="#">Vendas</a></li>
+                        <li><a href="#">Parcerias</a></li>
+                        <li><a href="#">Status do Sistema</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Zaratini.IA. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Backend simulation - would connect to actual backend in production
+        document.addEventListener('DOMContentLoaded', function() {
+            // Login button functionality
+            document.querySelector('.btn-login').addEventListener('click', function() {
+                alert('Redirecionando para a página de login...');
+                // In a real implementation, this would redirect to login page
+            });
+            
+            // Signup button functionality
+            document.querySelector('.btn-signup').addEventListener('click', function() {
+                alert('Redirecionando para a página de cadastro...');
+                // In a real implementation, this would redirect to signup page
+            });
+            
+            // Primary CTA buttons
+            const primaryButtons = document.querySelectorAll('.btn-primary');
+            primaryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('Iniciando processo de configuração da plataforma...');
+                    // In a real implementation, this would start the onboarding process
+                });
+            });
+            
+            // Simulate dashboard functionality
+            const dashboardModules = document.querySelectorAll('.dashboard-module');
+            dashboardModules.forEach(module => {
+                module.addEventListener('click', function() {
+                    const title = this.querySelector('.module-title').textContent;
+                    alert(`Abrindo configurações do módulo: ${title}`);
+                    // In a real implementation, this would open the module settings
+                });
+            });
+        });
+    </script>
+</body>
+</html>
